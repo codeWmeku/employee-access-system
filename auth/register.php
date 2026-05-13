@@ -55,7 +55,7 @@ if(isset($_POST['register'])) {
                             <?php echo $success; ?><br><br>
                             <small class="text-muted">An administrator will review your request and approve your account soon. You will be able to login once approved.</small>
                         </div>
-                        <a href="login.php" class="btn btn-primary w-100 mt-3">Go to Login</a>
+                        <a href="employee-login.php" class="btn btn-primary w-100 mt-3">Go to Employee Login</a>
                     <?php } else { ?>
                         <?php if(isset($error)) { ?>
                             <div class="alert alert-danger">
