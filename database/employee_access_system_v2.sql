@@ -1,6 +1,11 @@
+-- Drop existing database if it exists
+DROP DATABASE IF EXISTS employee_access_system;
+
+-- Create fresh database
 CREATE DATABASE employee_access_system;
 USE employee_access_system;
 
+-- Create employees table with status and created_at
 CREATE TABLE employees (
     id INT AUTO_INCREMENT PRIMARY KEY,
     fullname VARCHAR(100) NOT NULL,
@@ -11,15 +16,17 @@ CREATE TABLE employees (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Insert default admin account
+-- Insert default admin account (password: admin12345)
 INSERT INTO employees (fullname, email, password, role, status) 
 VALUES ('Administrator', 'admin@system.local', '$2y$10$G1ELHqvvPfKM6/u5jjxDy.CqQHr.YQX6d6x6PrN6/l0H5xN5D6b7a', 'admin', 'approved');
 
+-- Create departments table
 CREATE TABLE departments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     department_name VARCHAR(100) NOT NULL
 );
 
+-- Create permissions table
 CREATE TABLE permissions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     employee_id INT,
@@ -28,6 +35,7 @@ CREATE TABLE permissions (
     FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE CASCADE
 );
 
+-- Create access_logs table
 CREATE TABLE access_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     employee_id INT,

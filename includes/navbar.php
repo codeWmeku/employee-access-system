@@ -8,9 +8,10 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="ms-auto">
-                <?php if(strpos($_SERVER['PHP_SELF'], '/admin/') !== false) { ?>
+                <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin') { ?>
                     <!-- Admin Navigation -->
                     <a href="dashboard.php" class="btn btn-outline-light btn-sm">Dashboard</a>
+                    <a href="approvals.php" class="btn btn-outline-light btn-sm">📋 Approvals</a>
                     <a href="employees.php" class="btn btn-outline-light btn-sm">Employees</a>
                     <a href="departments.php" class="btn btn-outline-light btn-sm">Departments</a>
                     <a href="permissions.php" class="btn btn-outline-light btn-sm">Permissions</a>

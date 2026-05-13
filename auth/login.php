@@ -13,12 +13,23 @@ if(isset($_POST['login'])) {
     $user = mysqli_fetch_assoc($result);
 
     if($user && password_verify($password, $user['password'])) {
+        
+        // Check if account is approved
+        if($user['status'] != 'approved') {
+            $error = "Your account is pending admin approval. Please wait for approval before logging in.";
+        } else {
+            // Login successful
+            $_SESSION['employee_id'] = $user['id'];
+            $_SESSION['fullname'] = $user['fullname'];
+            $_SESSION['role'] = $user['role'];
 
-        $_SESSION['employee_id'] = $user['id'];
-        $_SESSION['fullname'] = $user['fullname'];
-        $_SESSION['role'] = $user['role'];
-
-        header("Location: ../admin/dashboard.php");
+            // Redirect based on role
+            if($user['role'] == 'admin') {
+                header("Location: ../admin/dashboard.php");
+            } else {
+                header("Location: ../employee-dashboard.php");
+            }
+        }
     } else {
         $error = "Invalid Email or Password";
     }
@@ -70,7 +81,13 @@ if(isset($_POST['login'])) {
                     </form>
 
                     <div class="mt-3 text-center">
-                        <p>Don't have an account? <a href="register.php" class="text-decoration-none">Create one here</a></p>
+                        <p>Don't have an account? <a href="register.php" class="text-decoration-none">Register here</a></p>
+                    </div>
+
+                    <div class="alert alert-info mt-3">
+                        <small><strong>Admin Test Credentials:</strong><br>
+                        Email: admin@system.local<br>
+                        Password: admin12345</small>
                     </div>
 
                 </div>
