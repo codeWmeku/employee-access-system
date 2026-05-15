@@ -8,6 +8,7 @@ if(isset($_SESSION['employee_id'])) {
     } else {
         header("Location: ../employee-dashboard.php");
     }
+    exit;
 }
 ?>
 

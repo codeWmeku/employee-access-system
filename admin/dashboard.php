@@ -4,6 +4,7 @@ include '../config/db.php';
 
 if(!isset($_SESSION['employee_id'])) {
     header("Location: ../auth/login.php");
+    exit;
 }
 
 include '../includes/header.php';

@@ -4,6 +4,7 @@ include '../config/db.php';
 
 if(!isset($_SESSION['employee_id']) || $_SESSION['role'] != 'admin') {
     header("Location: ../auth/login.php");
+    exit;
 }
 
 // Approve employee
@@ -11,6 +12,7 @@ if(isset($_GET['approve'])) {
     $id = $_GET['approve'];
     mysqli_query($conn, "UPDATE employees SET status='approved' WHERE id='$id' AND role='employee'");
     header("Location: approvals.php");
+    exit;
 }
 
 // Reject employee
@@ -18,6 +20,7 @@ if(isset($_GET['reject'])) {
     $id = $_GET['reject'];
     mysqli_query($conn, "DELETE FROM employees WHERE id='$id' AND role='employee' AND status='pending'");
     header("Location: approvals.php");
+    exit;
 }
 
 include '../includes/header.php';

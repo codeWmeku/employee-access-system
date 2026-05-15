@@ -2,8 +2,9 @@
 session_start();
 include '../config/db.php';
 
-if(!isset($_SESSION['employee_id'])) {
+if(!isset($_SESSION['employee_id']) || $_SESSION['role'] != 'admin') {
     header("Location: ../auth/login.php");
+    exit;
 }
 
 // Add permission

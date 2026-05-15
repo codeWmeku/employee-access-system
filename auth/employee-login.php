@@ -24,6 +24,7 @@ if(isset($_POST['login'])) {
             $_SESSION['role'] = $user['role'];
 
             header("Location: ../employee-dashboard.php");
+            exit;
         }
     } else {
         $error = "Invalid Email or Password";

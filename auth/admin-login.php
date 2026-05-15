@@ -10,17 +10,26 @@ if(isset($_POST['login'])) {
     $query = "SELECT * FROM employees WHERE email='$email' AND role='admin'";
     $result = mysqli_query($conn, $query);
 
-    $user = mysqli_fetch_assoc($result);
-
-    if($user && password_verify($password, $user['password'])) {
-        // Login successful - admins don't need approval
-        $_SESSION['employee_id'] = $user['id'];
-        $_SESSION['fullname'] = $user['fullname'];
-        $_SESSION['role'] = $user['role'];
-
-        header("Location: ../admin/dashboard.php");
+    if(!$result) {
+        $error = "Database error: " . mysqli_error($conn);
     } else {
-        $error = "Invalid Admin Credentials";
+        $user = mysqli_fetch_assoc($result);
+        
+        if($user) {
+            if(password_verify($password, $user['password'])) {
+                // Login successful - admins don't need approval
+                $_SESSION['employee_id'] = $user['id'];
+                $_SESSION['fullname'] = $user['fullname'];
+                $_SESSION['role'] = $user['role'];
+
+                header("Location: ../admin/dashboard.php");
+                exit;
+            } else {
+                $error = "Invalid Admin Credentials (password mismatch)";
+            }
+        } else {
+            $error = "Invalid Admin Credentials (user not found)";
+        }
     }
 }
 ?>

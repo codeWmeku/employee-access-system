@@ -18,7 +18,7 @@ CREATE TABLE employees (
 
 -- Insert default admin account (password: admin12345)
 INSERT INTO employees (fullname, email, password, role, status) 
-VALUES ('Administrator', 'admin@system.local', '$2y$10$G1ELHqvvPfKM6/u5jjxDy.CqQHr.YQX6d6x6PrN6/l0H5xN5D6b7a', 'admin', 'approved');
+VALUES ('Administrator', 'admin@system.local', '$2y$12$B.8MwEBvKmkoBi6olOXLXuFYp3568kKqUNZzPd8hreAnbe54gSxmu', 'admin', 'approved');
 
 -- Create departments table
 CREATE TABLE departments (
